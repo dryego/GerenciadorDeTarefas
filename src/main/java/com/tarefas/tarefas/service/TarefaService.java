@@ -81,4 +81,15 @@ public class TarefaService {
         }
         return  new Resposta<>(404,"Tarefa nao localizada.", null);
     }
+
+    public Resposta<Tarefa> excluirTarefa(Long id){
+        Optional<Tarefa> tarefa = tarefaRepositori.findById(id);
+
+        if(tarefa.isPresent()){
+            tarefaRepositori.delete(tarefa.get());
+
+            return new Resposta<>(200,"A tarefa foi excluida com sucesso.", tarefa.get());
+        }
+        return new Resposta<>(404,"Tarefa não localizada.", null);
+    }
 }

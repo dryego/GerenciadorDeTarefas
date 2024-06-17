@@ -85,4 +85,15 @@ public class TarefaController {
 
         return  ResponseEntity.status(tarefaRealizada.getStatus()).body(tarefaRealizada.getMenssagen());
     }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<Object> deleteTarefa(@PathVariable Long id){
+        Resposta<Tarefa> tarefaExcluida = tarefaService.excluirTarefa(id);
+
+        if (tarefaExcluida.getData() == null){
+            return ResponseEntity.status(tarefaExcluida.getStatus()).body(tarefaExcluida.getMenssagen());
+        }
+
+        return ResponseEntity.status(tarefaExcluida.getStatus()).body(tarefaExcluida.getMenssagen());
+    }
 }
